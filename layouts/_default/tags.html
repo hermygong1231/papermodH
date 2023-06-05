@@ -1,0 +1,14 @@
+{{- $taxonomies := .Site.Taxonomies.tags }}
+{{- if gt (len $taxonomies) 0 }}
+<h2 style="margin-top: 32px">{{- (.Param "tagsTitle") | default "tags" }}</h2>
+<ul class="terms-tags">
+    {{- range $name, $value := $taxonomies }}
+    {{- $count := .Count }}
+    {{- with site.GetPage (printf "/series/%s" $name) }}
+    <li>
+        <a href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
+    </li>
+    {{- end }}
+    {{- end }}
+</ul>
+{{- end }}
