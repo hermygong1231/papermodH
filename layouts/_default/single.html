@@ -20,6 +20,7 @@
       {{- partial "post_canonical.html" . -}}
     </div>
     {{- end }}
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css" />
   </header>
   {{- $isHidden := .Params.cover.hidden | default site.Params.cover.hiddenInSingle | default site.Params.cover.hidden }}
   {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
@@ -49,6 +50,17 @@
     {{- partial "share_icons.html" . -}}
     {{- end }}
   </footer>
+
+  <div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline-git-main-gearinger.vercel.app/',
+    });
+  </script>
+
 
   {{- if (.Param "comments") }}
   {{- partial "comments.html" . }}
